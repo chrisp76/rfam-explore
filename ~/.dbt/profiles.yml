@@ -3,5 +3,6 @@ rfam_analytics:
   outputs:
     dev:
       type: duckdb
-      path: '/Users/christianpohlmann/Coding/sql_to_duckdb_pipeline.duckdb'  # Updated path to the newly created database
+      path: '/Users/christianpohlmann/Coding/rfam_analytics/dev.duckdb'  # Path to our new database
+      schema: main  # Explicitly specify the schema
       threads: 4 

@@ -7,10 +7,9 @@ WITH family_stats AS (
         f.num_genome_seq,
         f.number_of_species,
         COUNT(DISTINCT g.upid) as genome_count,
-        COUNT(DISTINCT g.kingdom) as kingdom_count,
-        COUNT(DISTINCT g.phylum) as phylum_count
+        COUNT(DISTINCT g.kingdom) as kingdom_count
     FROM {{ ref('stg_family') }} f
-    LEFT JOIN {{ ref('stg_genome') }} g ON f.rfam_acc = g.upid  -- This is a placeholder join, adjust based on actual relationship
+    LEFT JOIN {{ ref('stg_genome') }} g ON f.rfam_id = g.upid  -- Adjusted join condition
     GROUP BY 1, 2, 3, 4, 5, 6
 )
 
@@ -23,7 +22,6 @@ SELECT
     number_of_species,
     genome_count,
     kingdom_count,
-    phylum_count,
     CASE 
         WHEN genome_count = 0 THEN 0
         ELSE ROUND(number_of_species::FLOAT / genome_count, 2)

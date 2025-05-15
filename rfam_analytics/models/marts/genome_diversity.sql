@@ -3,28 +3,26 @@ WITH genome_rna_stats AS (
         g.upid,
         g.assembly_acc,
         g.kingdom,
-        g.phylum,
-        g.class,
-        g.order_name,
-        g.family,
-        g.species,
+        g.scientific_name,
+        g.common_name,
+        g.num_rfam_regions,
+        g.num_families,
         COUNT(DISTINCT f.rfam_acc) as unique_rna_families,
         COUNT(DISTINCT f.type) as unique_rna_types,
         SUM(f.num_genome_seq) as total_rna_sequences
     FROM {{ ref('stg_genome') }} g
-    LEFT JOIN {{ ref('stg_family') }} f ON g.upid = f.rfam_acc  -- This is a placeholder join, adjust based on actual relationship
-    GROUP BY 1, 2, 3, 4, 5, 6, 7, 8
+    LEFT JOIN {{ ref('stg_family') }} f ON g.upid = f.rfam_id  -- Adjusted join condition
+    GROUP BY 1, 2, 3, 4, 5, 6, 7
 )
 
 SELECT
     upid,
     assembly_acc,
     kingdom,
-    phylum,
-    class,
-    order_name,
-    family,
-    species,
+    scientific_name,
+    common_name,
+    num_rfam_regions,
+    num_families,
     unique_rna_families,
     unique_rna_types,
     total_rna_sequences,
