@@ -3,5 +3,5 @@ rfam_analytics:
   outputs:
     dev:
       type: duckdb
-      path: '/Users/christianpohlmann/Coding/direct_copy.duckdb'  # Path to your existing DuckDB database
+      path: '/Users/christianpohlmann/Coding/sql_to_duckdb_pipeline.duckdb'  # Updated path to the newly created database
       threads: 4 
