@@ -9,39 +9,9 @@ from pygments.formatters import HtmlFormatter
 
 st.set_page_config(page_title="Rfam Database Explorer", layout="wide")
 
-# Add custom CSS to improve text readability
-st.markdown("""
-<style>
-/* Make SQL input text area more readable */
-.stTextArea textarea {
-    color: #FFFFFF !important;
-    background-color: #1E1E1E !important;
-    font-family: monospace !important;
-    font-size: 14px !important;
-}
-
-/* Make filter fields wider and more readable */
-.stSelectbox, .stTextInput {
-    min-width: 100% !important;
-}
-
-/* Adjust sidebar width */
-[data-testid="stSidebar"] {
-    min-width: 350px !important;
-    width: 350px !important;
-}
-
-/* Enhance styling for query results and syntax highlighting */
-.highlight {
-    background-color: #272822 !important;
-    padding: 10px !important;
-    border-radius: 5px !important;
-}
-.highlight pre {
-    color: #F8F8F2 !important;
-}
-</style>
-""", unsafe_allow_html=True)
+# Load external CSS
+with open('styles.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Add syntax highlighting CSS
 def get_syntax_highlighted_sql(sql):
