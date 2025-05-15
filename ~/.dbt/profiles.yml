@@ -1,0 +1,7 @@
+rfam_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '/Users/christianpohlmann/Coding/direct_copy.duckdb'  # Path to your existing DuckDB database
+      threads: 4 
